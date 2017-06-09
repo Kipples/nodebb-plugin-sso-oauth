@@ -30,8 +30,8 @@
 	var authenticationController = module.parent.require('./controllers/authentication');
 
 	var constants = Object.freeze({
-			type: '',	// Either 'oauth' or 'oauth2'
-			name: '',	// Something unique to your OAuth provider in lowercase, like "github", or "nodebb"
+			type: 'oauth2',	// Either 'oauth' or 'oauth2'
+			name: 'twitch',	// Something unique to your OAuth provider in lowercase, like "github", or "nodebb"
 			oauth: {
 				requestTokenURL: '',
 				accessTokenURL: '',
@@ -40,12 +40,13 @@
 				consumerSecret: ''
 			},
 			oauth2: {
-				authorizationURL: '',
-				tokenURL: '',
-				clientID: '',
-				clientSecret: ''
+				authorizationURL: 'https://api.twitch.tv/kraken/oauth2/authorize',
+				tokenURL: 'https://api.twitch.tv/kraken/oauth2/token',
+				clientID: process.env.TWITCH_CLIENT_ID,
+				clientSecret: process.env.TWITCH_CLIENT_SECRET
 			},
-			userRoute: ''	// This is the address to your app's "user profile" API endpoint (expects JSON)
+                        scope: 'user_read',
+			userRoute: 'https://api.twitch.tv/kraken/user'	// This is the address to your app's "user profile" API endpoint (expects JSON)
 		}),
 		configOk = false,
 		OAuth = {}, passportOAuth, opts;
@@ -151,8 +152,8 @@
 		// console.log(data);
 
 		var profile = {};
-		profile.id = data.id;
-		profile.displayName = data.name;
+		profile.id = data._id;
+		profile.displayName = data.display_name;
 		profile.emails = [{ value: data.email }];
 
 		// Do you want to automatically make somebody an admin? This line might help you do that...
