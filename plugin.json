@@ -1,8 +1,8 @@
 {
-	"id": "nodebb-plugin-sso-oauth",
-	"name": "NodeBB OAuth SSO",
-	"description": "NodeBB Plugin that allows users to login/register via any configured OAuth provider.",
-	"url": "https://github.com/julianlam/nodebb-plugin-sso-oauth",
+	"id": "nodebb-plugin-sso-twitch",
+	"name": "NodeBB Twitch SSO",
+	"description": "NodeBB Plugin that allows users to login/register via Twitch.",
+	"url": "https://github.com/kipples/nodebb-plugin-sso-twitch",
 	"library": "./library.js",
 	"hooks": [
 		{ "hook": "static:user.delete", "method": "deleteUserData" },
